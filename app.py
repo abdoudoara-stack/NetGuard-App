@@ -106,4 +106,4 @@ def main(page: ft.Page):
 
     page.add(header, target_input, buttons, result_card)
 
-ft.app(target=main)
+ft.run(main)
