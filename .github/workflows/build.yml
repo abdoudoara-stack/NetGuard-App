@@ -13,17 +13,23 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-      - name: Install Flet
-        run: pip install flet requests
+      - name: Install Flet and Create Config
+        run: |
+          pip install flet requests
+          printf '[project]\nname = "NetGuard"\nversion = "1.0.0"\ndependencies = ["flet", "requests"]\n' > pyproject.toml
       - name: Build APK
-        run: flet build apk --project "NetGuard" --org "com.netguard.toolkit"
+        run: flet build apk
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: NetGuard-APK
           path: build/apk/*.apk
-          
