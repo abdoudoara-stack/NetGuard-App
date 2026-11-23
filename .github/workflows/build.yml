@@ -27,7 +27,7 @@ jobs:
           pip install flet requests
           printf '[project]\nname = "NetGuard"\nversion = "1.0.0"\ndependencies = ["flet", "requests"]\n' > pyproject.toml
       - name: Build APK
-        run: flet build apk --yes
+        run: flet build apk --module-name app --yes
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
